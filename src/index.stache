@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <title>{{title}}</title>
+  </head>
+  <body>
+    <can-import from="esri-map/styles.less" />
+    <can-import from="esri-map/app" export-as="viewModel" />
+    <can-import from="spectre-canjs/list-table/" />
+    <can-import from="spectre.css" />
+    <list-table {objects}="data" id-prop="_cid" />
+
+      <div id="map" ($inserted)="createMap(%element)" />
+
+    <h1>{{message}}</h1>
+    
+    {{#switch env.NODE_ENV}}
+      {{#case "production"}}
+        <script src="{{joinBase 'steal.production.js'}}"></script>
+      {{/case}}
+      {{#default}}
+        <script src="/node_modules/steal/steal.js"></script>
+      {{/default}}
+    {{/switch}}
+    <script src="https://js.arcgis.com/4.4/" data-esri-loader="loaded"></script>
+  </body>
+</html>
